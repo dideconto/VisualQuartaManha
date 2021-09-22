@@ -1,1 +1,17 @@
-<p>cadastrar-produto works!</p>
+<div id="nome">
+    <label for="nome">Nome:</label>
+    <input type="text" name="nome" [(ngModel)]="nome" />
+</div>
+<div id="descricao">
+    <label for="descricao">Descrição:</label>
+    <input type="text" name="descricao" [(ngModel)]="descricao" />
+</div>
+<div id="quantidade">
+    <label for="quantidade">Quantidade:</label>
+    <input type="text" name="quantidade" [(ngModel)]="quantidade" />
+</div>
+<div id="preco">
+    <label for="preco">Preço:</label>
+    <input type="text" name="preco" [(ngModel)]="preco" />
+</div>
+<button (click)="cadastrar()">Cadastrar</button>
