@@ -14,4 +14,12 @@
     <label for="preco">Preço:</label>
     <input type="text" name="preco" [(ngModel)]="preco" />
 </div>
+<div id="categoria">
+    <label for="categoria">Categoria:</label>
+    <select name="categoria" [(ngModel)]="categoriaId">
+        <option *ngFor="let categoria of categorias" value="{{ categoria.id }}">
+            {{ categoria.nome }}
+        </option>
+    </select>
+</div>
 <button (click)="cadastrar()">Cadastrar</button>

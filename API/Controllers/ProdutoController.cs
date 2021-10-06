@@ -4,6 +4,7 @@ using System.Linq;
 using API.Data;
 using API.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -22,6 +23,7 @@ namespace API.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] Produto produto)
         {
+            produto.Categoria = _context.Categorias.Find(produto.CategoriaId);
             _context.Produtos.Add(produto);
             _context.SaveChanges();
             return Created("", produto);
@@ -30,7 +32,10 @@ namespace API.Controllers
         //GET: /api/produto/list
         [Route("list")]
         [HttpGet]
-        public IActionResult List() => Ok(_context.Produtos.ToList());
+        public IActionResult List() =>
+            Ok(_context.Produtos
+                .Include(produto => produto.Categoria)
+                .ToList());
 
         //GET: api/produto/getbyid/1
         [HttpGet]
@@ -51,6 +56,8 @@ namespace API.Controllers
         [Route("delete/{name}")]
         public IActionResult Delete(string name)
         {
+            // Produto produto = _context.Produtos
+            //     .FirstOrDefault(produto => produto.CategoriaId == 3);
             //Where -> Expressão lambda
             //Buscar um objeto pelo nome
             Produto produto = _context.Produtos.FirstOrDefault(produto => produto.Nome == name);

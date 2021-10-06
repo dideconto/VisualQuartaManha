@@ -4,7 +4,10 @@ Content-Type: application/json
 
 {
     "Nome" : "Bolacha",
-    "Preco" : 3.5
+    "Preco" : 3.5,
+    "Quantidade": 7,
+    "Descricao" : "Descrição do produto",
+    "CategoriaId" : 1
 }
 
 ### Listar produtos
