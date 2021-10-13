@@ -8,16 +8,21 @@ import { ProdutoService } from "src/app/services/produto.service";
     styleUrls: ["./listar-produto.component.css"],
 })
 export class ListarProdutoComponent implements OnInit {
-    produtos: Produto[] = [];
+    fonteDados: Produto[] = [];
+    colunasExibidas: String[] = [
+        "id",
+        "nome",
+        "descricao",
+        "preco",
+        "quantidade",
+        "categoria",
+    ];
 
     constructor(private service: ProdutoService) {}
 
     ngOnInit(): void {
         this.service.list().subscribe((produtos) => {
-            this.produtos = produtos;
-            for (let produto of produtos) {
-                console.log(produto);
-            }
+            this.fonteDados = produtos;
         });
     }
 }

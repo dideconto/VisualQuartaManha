@@ -1,25 +1,47 @@
-<div id="nome">
-    <label for="nome">Nome:</label>
-    <input type="text" name="nome" [(ngModel)]="nome" />
-</div>
-<div id="descricao">
-    <label for="descricao">Descrição:</label>
-    <input type="text" name="descricao" [(ngModel)]="descricao" />
-</div>
-<div id="quantidade">
-    <label for="quantidade">Quantidade:</label>
-    <input type="text" name="quantidade" [(ngModel)]="quantidade" />
-</div>
-<div id="preco">
-    <label for="preco">Preço:</label>
-    <input type="text" name="preco" [(ngModel)]="preco" />
-</div>
-<div id="categoria">
-    <label for="categoria">Categoria:</label>
-    <select name="categoria" [(ngModel)]="categoriaId">
-        <option *ngFor="let categoria of categorias" value="{{ categoria.id }}">
-            {{ categoria.nome }}
-        </option>
-    </select>
-</div>
-<button (click)="cadastrar()">Cadastrar</button>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Cadastrar Produto</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-form-field class="input" id="nome">
+            <mat-label for="nome">Nome:</mat-label>
+            <input matInput type="text" name="nome" [(ngModel)]="nome" />
+        </mat-form-field>
+        <mat-form-field class="input" id="descricao">
+            <mat-label for="descricao">Descrição:</mat-label>
+            <input
+                matInput
+                type="text"
+                name="descricao"
+                [(ngModel)]="descricao"
+            />
+        </mat-form-field>
+        <mat-form-field class="input" id="quantidade">
+            <mat-label for="quantidade">Quantidade:</mat-label>
+            <input
+                matInput
+                type="text"
+                name="quantidade"
+                [(ngModel)]="quantidade"
+            />
+        </mat-form-field>
+        <mat-form-field class="input" id="preco">
+            <mat-label for="preco">Preço:</mat-label>
+            <input matInput type="text" name="preco" [(ngModel)]="preco" />
+        </mat-form-field>
+        <mat-form-field class="input" id="categoria">
+            <mat-label for="categoria">Categoria:</mat-label>
+            <mat-select name="categoria" [(ngModel)]="categoriaId">
+                <mat-option
+                    *ngFor="let categoria of categorias"
+                    value="{{ categoria.id }}"
+                >
+                    {{ categoria.nome }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-card-content>
+    <button mat-raised-button color="warn" (click)="cadastrar()">
+        Cadastrar
+    </button>
+</mat-card>
