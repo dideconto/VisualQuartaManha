@@ -32,7 +32,6 @@ export class CadastrarProdutoComponent implements OnInit {
     }
 
     cadastrar(): void {
-        console.log(this.categoriaId);
         let produto: Produto = {
             nome: this.nome,
             descricao: this.descricao,
@@ -41,7 +40,6 @@ export class CadastrarProdutoComponent implements OnInit {
             categoriaId: this.categoriaId,
         };
         this.produtoService.create(produto).subscribe((produto) => {
-            console.log(produto);
             this.router.navigate(["produto/listar"]);
         });
     }

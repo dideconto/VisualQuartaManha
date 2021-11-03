@@ -2,11 +2,11 @@
     <button (click)="sidenav.toggle()" mat-icon-button>
         <mat-icon>menu</mat-icon>
     </button>
-    <span>Ecommerce</span>
+    <a class="title" mat-button routerLink=""> Ecommerce</a>
 </mat-toolbar>
 
 <mat-sidenav-container class="container">
-    <mat-sidenav #sidenav opened mode="side" class="sidenav">
+    <mat-sidenav #sidenav mode="side" class="sidenav">
         <mat-nav-list>
             <a mat-list-item routerLink="/produto/cadastrar">
                 <mat-icon mat-list-icon>add</mat-icon>
