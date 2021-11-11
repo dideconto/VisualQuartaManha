@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ItemVenda } from "src/app/models/item-venda";
+import { ItemVendaService } from "src/app/services/item-venda.service";
 
 @Component({
     selector: "app-carrinho",
@@ -10,13 +11,15 @@ export class CarrinhoComponent implements OnInit {
     itens: ItemVenda[] = [];
     colunasExibidas: String[] = ["imagem", "nome", "preco", "quantidade"];
     valorTotal!: number;
-
-    constructor() {}
+    constructor(private itemService: ItemVendaService) {}
 
     ngOnInit(): void {
-        this.itens = JSON.parse(localStorage.getItem("itens")!) || [];
-        this.valorTotal = this.itens.reduce((total, item) => {
-            return total + item.preco * item.quantidade;
-        }, 0);
+        let carrinhoId = localStorage.getItem("carrinhoId")! || "";
+        this.itemService.getByCartId(carrinhoId).subscribe((itens) => {
+            this.itens = itens;
+            this.valorTotal = this.itens.reduce((total, item) => {
+                return total + item.preco * item.quantidade;
+            }, 0);
+        });
     }
 }

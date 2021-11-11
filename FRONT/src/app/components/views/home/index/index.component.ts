@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { ItemVenda } from "src/app/models/item-venda";
 import { Produto } from "src/app/models/produto";
+import { ItemVendaService } from "src/app/services/item-venda.service";
 import { ProdutoService } from "src/app/services/produto.service";
 
 @Component({
@@ -11,10 +12,10 @@ import { ProdutoService } from "src/app/services/produto.service";
 })
 export class IndexComponent implements OnInit {
     produtos!: Produto[];
-    itens: ItemVenda[] = [];
 
     constructor(
         private produtoService: ProdutoService,
+        private itemService: ItemVendaService,
         private router: Router
     ) {}
 
@@ -22,18 +23,19 @@ export class IndexComponent implements OnInit {
         this.produtoService.list().subscribe((produtos) => {
             this.produtos = produtos;
         });
-        this.itens = JSON.parse(localStorage.getItem("itens")!) || [];
     }
 
     adicionar(produto: Produto): void {
         let item: ItemVenda = {
             produto: produto,
+            produtoId: produto.id!,
             quantidade: 1,
             preco: produto.preco,
-            produtoId: produto.id!,
+            carrinhoId: localStorage.getItem("carrinhoId")! || "",
         };
-        this.itens.push(item);
-        localStorage.setItem("itens", JSON.stringify(this.itens));
-        this.router.navigate(["/venda/carrinho"]);
+        this.itemService.create(item).subscribe((item) => {
+            localStorage.setItem("carrinhoId", item.carrinhoId!);
+            this.router.navigate(["/venda/carrinho"]);
+        });
     }
 }
