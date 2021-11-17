@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
+    //Identity
     public class DataContext : DbContext
     {
         //Entity Framework - Code First
@@ -13,5 +14,6 @@ namespace API.Data
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<ItemVenda> ItensVenda { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
     }
 }
